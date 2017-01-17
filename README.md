@@ -1,5 +1,5 @@
 # NGINX-based VOD Packager
-## nginx-vod-module [![Build Status](https://travis-ci.org/kaltura/nginx-vod-module.svg?branch=master)](https://travis-ci.org/kaltura/nginx-vod-module)
+## nginx-vod-module [![Build Status](https://travis-ci.org/borhan/nginx-vod-module.svg?branch=master)](https://travis-ci.org/borhan/nginx-vod-module)
 
 ### Features
 
@@ -106,24 +106,24 @@ Please also make sure you have the ffmpeg libs and headers in your the build ENV
 #### RHEL/CentOS RPM
 If you are using RHEL or CentOS 6, you can install by setting up the repo:
 ```
-# rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-# yum install kaltura-nginx
+# rpm -ihv http://installrepo.borhan.org/releases/borhan-release.noarch.rpm
+# yum install borhan-nginx
 ```
-If you are using RHEL/CentOS7, install the kaltura-release RPM and modify /etc/yum.repos.d/kaltura.repo to read:
+If you are using RHEL/CentOS7, install the borhan-release RPM and modify /etc/yum.repos.d/borhan.repo to read:
 ```
-baseurl = http://installrepo.kaltura.org/releases/rhel7/RPMS/$basearch/
+baseurl = http://installrepo.borhan.org/releases/rhel7/RPMS/$basearch/
 ```
 Instead of the default:
 ```
-baseurl = http://installrepo.kaltura.org/releases/latest/RPMS/$basearch/
+baseurl = http://installrepo.borhan.org/releases/latest/RPMS/$basearch/
 ```
 
 #### Debian/Ubuntu deb package
 ```
-# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
-# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian lynx main" > /etc/apt/sources.list.d/kaltura.list
+# wget -O - http://installrepo.borhan.org/repo/apt/debian/borhan-deb.gpg.key|apt-key add -
+# echo "deb [arch=amd64] http://installrepo.borhan.org/repo/apt/debian lynx main" > /etc/apt/sources.list.d/borhan.list
 # apt-get update
-# apt-get install kaltura-nginx
+# apt-get install borhan-nginx
 ```
 *Ubuntu NOTE: You must also make sure the multiverse repo is enabled in /etc/apt/sources.list*
 
@@ -131,7 +131,7 @@ If you wish to make use of the following features:
 - Thumbnail capture
 - Playback rate change - 0.5x up to 2x
 
-You will also need to install the kaltura-ffmpeg package.
+You will also need to install the borhan-ffmpeg package.
 
 ### URL structure
 
@@ -583,7 +583,7 @@ Media packaged by nginx-vod-module can be protected using CDN tokens, this works
 * The CDN validates the token, and if found to be valid, forwards the request to nginx-vod-module 
 	on the origin. 
 * The nginx server builds the manifest response and generates tokens for the segment URLs
-	contained inside it. The module https://github.com/kaltura/nginx-secure-token-module can
+	contained inside it. The module https://github.com/borhan/nginx-secure-token-module can
 	be used to accomplish this task, it currently support Akamai tokens and CloudFront tokens.
 	See the readme of this module for more details.
 * The CDN validates the token on each segment that is requested.
@@ -611,7 +611,7 @@ scenarios).
 
 In addition, it is possible to build a token based solution (as detailed in the previous section) 
 without a CDN, by having the nginx server validate the token. 
-The module https://github.com/kaltura/nginx-akamai-token-validate-module can be used
+The module https://github.com/borhan/nginx-akamai-token-validate-module can be used
 to validate Akamai tokens. Locations on which the module is enabled will return 403 unless the 
 request contains a valid Akamai token. See the readme of this module for more details.
 
@@ -619,7 +619,7 @@ request contains a valid Akamai token. See the readme of this module for more de
 
 As an alternative to tokenization, URL encryption can be used to prevent an attacker from being
 able to craft a playable URL. URL encryption can be implemented with 
-https://github.com/kaltura/nginx-secure-token-module, and is supported for HLS and DASH (with 
+https://github.com/borhan/nginx-secure-token-module, and is supported for HLS and DASH (with 
 manifest format set to segmentlist). 
 
 In terms of security, the main advantage of CDN tokens over URL encryption is that CDN tokens
@@ -909,7 +909,7 @@ Sets an nginx location to which the request is forwarded after encountering a fi
 
 #### vod_proxy_header_name
 * **syntax**: `vod_proxy_header_name name`
-* **default**: `X-Kaltura-Proxy`
+* **default**: `X-Borhan-Proxy`
 * **context**: `http`, `server`, `location`
 
 Sets the name of an HTTP header that is used to prevent fallback proxy loops (local/mapped modes only).
@@ -1568,7 +1568,7 @@ Note: Configuration directives that can accept variables are explicitly marked a
 
 	http {
 		upstream fallback {
-			server fallback.kaltura.com:80;
+			server fallback.borhan.com:80;
 		}
 
 		server {
@@ -1616,11 +1616,11 @@ Note: Configuration directives that can accept variables are explicitly marked a
 
 	http {
 		upstream kalapi {
-			server www.kaltura.com:80;
+			server www.borhan.com:80;
 		}
 
 		upstream fallback {
-			server fallback.kaltura.com:80;
+			server fallback.borhan.com:80;
 		}
 
 		server {
@@ -1679,7 +1679,7 @@ Note: Configuration directives that can accept variables are explicitly marked a
 
 	http {
 		upstream kalapi {
-			server www.kaltura.com:80;
+			server www.borhan.com:80;
 		}
 
 		server {
@@ -1719,4 +1719,4 @@ Note: Configuration directives that can accept variables are explicitly marked a
 
 All code in this project is released under the [AGPLv3 license](http://www.gnu.org/licenses/agpl-3.0.html) unless a different license for a particular library is specified in the applicable library path. 
 
-Copyright © Kaltura Inc. All rights reserved.
+Copyright © Borhan Inc. All rights reserved.
